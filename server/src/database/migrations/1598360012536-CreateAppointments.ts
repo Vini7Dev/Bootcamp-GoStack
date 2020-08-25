@@ -11,6 +11,7 @@ export default class CreateAppointments1598360012536 implements MigrationInterfa
                         type: 'varchar',
                         isPrimary: true,
                         generationStrategy: 'uuid',
+                        default: 'uuid_generate_v4()',
                     },
                     {
                         name: 'provider',
@@ -18,7 +19,7 @@ export default class CreateAppointments1598360012536 implements MigrationInterfa
                         isNullable: false,
                     },
                     {
-                        name: 'time',
+                        name: 'date',
                         type: 'timestamp with time zone',
                         isNullable: false,
                     },
