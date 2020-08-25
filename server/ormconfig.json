@@ -1,0 +1,8 @@
+{
+    "type": "postgress",
+    "host": "locahost",
+    "port": 5432,
+    "username": "gostack-postgress",
+    "password": "postgress",
+    "database": "gostack_gobarber"
+}
