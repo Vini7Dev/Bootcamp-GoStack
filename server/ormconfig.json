@@ -1,8 +1,14 @@
 {
-    "type": "postgress",
-    "host": "locahost",
+    "type": "postgres",
+    "host": "localhost",
     "port": 5432,
-    "username": "gostack-postgress",
-    "password": "postgress",
-    "database": "gostack_gobarber"
+    "username": "postgres",
+    "password": "postgres",
+    "database": "gostack_gobarber",
+    "migrations": [
+        "./src/database/migrations/*.ts"
+    ],
+    "cli": {
+        "migrationsDir": "./src/database/migrations"
+    }
 }
