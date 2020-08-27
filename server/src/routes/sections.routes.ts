@@ -10,12 +10,12 @@ sectionsRouter.post('/', async (req, res) => {
 
         const createSectionService = new CreateSectionService();
 
-        const { password, ...restUserData } = await createSectionService.execute({
+        const { user: { password, ...restUserData }, token } = await createSectionService.execute({
             email: data.email,
             password: data.password
         });
 
-        return res.json(restUserData);
+        return res.json([ restUserData, token ]);
     }catch(err) {
         return res.status(400).json({ error: err });
     }
