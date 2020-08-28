@@ -28,6 +28,7 @@ export default function ensureAuthenticated(req: Request, res:Response , next: N
 
         return next();
     }catch(err) {
+        console.log(err);
         throw new Error('Invalid JWT token.');
     }
 }
