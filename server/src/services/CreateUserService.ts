@@ -2,6 +2,7 @@ import { getRepository } from 'typeorm';
 import { hash } from 'bcryptjs';
 
 import User from '../models/User';
+import AppError from '../errors/AppError';
 
 interface ServiceProps {
     name: string;
@@ -18,7 +19,7 @@ class CreateUserService {
         });
 
         if(checkEmailExists)
-            throw new Error(`This email already used.`);
+            throw new AppError(`This email already used.`);
 
         const cryptedPassword = await hash(password, 8);
 

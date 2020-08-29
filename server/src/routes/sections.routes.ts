@@ -5,20 +5,16 @@ import CreateSectionService from '../services/CreateSectionsService';
 const sectionsRouter = Router();
 
 sectionsRouter.post('/', async (req, res) => {
-    try{
-        const data = req.body;
+    const data = req.body;
 
-        const createSectionService = new CreateSectionService();
+    const createSectionService = new CreateSectionService();
 
-        const { user: { password, ...restUserData }, token } = await createSectionService.execute({
-            email: data.email,
-            password: data.password
-        });
+    const { user: { password, ...restUserData }, token } = await createSectionService.execute({
+        email: data.email,
+        password: data.password
+    });
 
-        return res.json([ restUserData, token ]);
-    }catch(err) {
-        return res.status(400).json({ error: err });
-    }
+    return res.json([ restUserData, token ]);
 });
 
 export default sectionsRouter;
