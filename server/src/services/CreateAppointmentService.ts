@@ -25,7 +25,7 @@ class CreateAppointmentService {
             provider_id,
             date: appointmentDate
         });
-
+    
         await appointmentsRepository.save(appointment);
 
         return appointment;
