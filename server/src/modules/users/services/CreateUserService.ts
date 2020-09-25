@@ -6,7 +6,7 @@ import AppError from '@shared/errors/AppError';
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 import IHashProvider from '../providers/HashProvider/models/IHashProvider';
 
-interface ServiceProps {
+interface IServiceProps {
     name: string;
     email: string;
     password: string;
@@ -22,7 +22,7 @@ class CreateUserService {
         private hashProvider: IHashProvider
     ) {}
 
-    public async execute({ name, email, password }: ServiceProps): Promise<User> {
+    public async execute({ name, email, password }: IServiceProps): Promise<User> {
         const checkEmailExists = await this.usersRepository.findByEmail(email);
 
         if(checkEmailExists)

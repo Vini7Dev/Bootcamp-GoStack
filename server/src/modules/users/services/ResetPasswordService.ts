@@ -7,7 +7,7 @@ import IUsersRepository from '../repositories/IUsersRepository';
 import IUserTokensRepository from '../repositories/IUserTokensRepository';
 import IHashProvider from '../providers/HashProvider/models/IHashProvider';
 
-interface IProps {
+interface IServiceProps {
     password: string;
     token: string
 }
@@ -25,7 +25,7 @@ class ResetPasswordService {
         private hashProvider: IHashProvider
     ) {}
 
-    public async execute({ password, token }: IProps): Promise<void> {
+    public async execute({ password, token }: IServiceProps): Promise<void> {
         const userToken = await this.userTokenRepository.findByToken(token);
 
         if(!userToken) {

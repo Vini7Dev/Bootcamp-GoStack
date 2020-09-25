@@ -4,7 +4,7 @@ import User from '@modules/users/infra/typeorm/entities/User';
 
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 
-interface ServiceProps {
+interface IServiceProps {
     user_id: string;
 }
 
@@ -15,7 +15,7 @@ class ListProvidersService {
         private usersRepository: IUsersRepository
     ) {}
 
-    public async execute({ user_id }: ServiceProps): Promise<User[]> {
+    public async execute({ user_id }: IServiceProps): Promise<User[]> {
         const users = await this.usersRepository.findAllProviders({ exept_user_id: user_id });
 
         return users;

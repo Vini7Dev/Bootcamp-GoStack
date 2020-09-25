@@ -7,7 +7,7 @@ import IUsersRepository from '../repositories/IUsersRepository';
 import IMailProvider from '@shared/container/providers/MailProvider/model/IMailProvider';
 import IUserTokensRepository from '../repositories/IUserTokensRepository';
 
-interface IProps {
+interface IServiceProps {
     email: string;
 }
 
@@ -24,7 +24,7 @@ class SendForgotPasswordEmailService {
         private userTokenRepository: IUserTokensRepository
     ) {}
 
-    public async execute({ email }: IProps): Promise<void> {
+    public async execute({ email }: IServiceProps): Promise<void> {
         const user = await this.usersRepository.findByEmail(email);
 
         if(!user) {

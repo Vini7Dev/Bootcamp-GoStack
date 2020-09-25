@@ -6,7 +6,7 @@ import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 import IHashProvider from '../providers/HashProvider/models/IHashProvider';
 import AppError from '@shared/errors/AppError';
 
-interface ServiceProps {
+interface IServiceProps {
     user_id: string;
     name: string;
     email: string;
@@ -24,7 +24,7 @@ class UpdateProfileService {
         private hashProvider: IHashProvider
     ) {}
 
-    public async execute({ user_id, name, email, old_password, password }: ServiceProps): Promise<User> {
+    public async execute({ user_id, name, email, old_password, password }: IServiceProps): Promise<User> {
         const user = await this.usersRepository.findById(user_id);
 
         if(!user) {

@@ -5,7 +5,7 @@ import AppError from '@shared/errors/AppError';
 
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 
-interface ServiceProps {
+interface IServiceProps {
     user_id: string;
 }
 
@@ -16,7 +16,7 @@ class ShowProfileService {
         private usersRepository: IUsersRepository,
     ) {}
 
-    public async execute({ user_id }: ServiceProps): Promise<User> {
+    public async execute({ user_id }: IServiceProps): Promise<User> {
         const user = await this.usersRepository.findById(user_id);
 
         if(!user) {

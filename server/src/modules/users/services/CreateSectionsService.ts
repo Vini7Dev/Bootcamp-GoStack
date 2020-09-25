@@ -8,12 +8,12 @@ import IHashProvider from '../providers/HashProvider/models/IHashProvider';
 
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 
-interface ServiceProps {
+interface IServiceProps {
     email: string;
     password: string;
 }
 
-interface Response {
+interface IResponse {
     user: User,
     token: string
 }
@@ -28,7 +28,7 @@ class CreateSectionsService {
         private hashProvider: IHashProvider
     ) {}
 
-    public async execute({email, password}: ServiceProps): Promise<Response> {
+    public async execute({email, password}: IServiceProps): Promise<IResponse> {
         const user = await this.usersRepository.findByEmail(email);
 
         if(!user){
