@@ -16,7 +16,7 @@ interface IResponse {
 }
 
 @injectable()
-class ListProviderDayAvailability {
+class ListProviderDayAvailabilityService {
     constructor(
         @inject('AppointmentsRepository')
         private appointmentsRepository: IAppointmentsRepository
@@ -56,4 +56,4 @@ class ListProviderDayAvailability {
     }
 }
 
-export default ListProviderDayAvailability;
+export default ListProviderDayAvailabilityService;

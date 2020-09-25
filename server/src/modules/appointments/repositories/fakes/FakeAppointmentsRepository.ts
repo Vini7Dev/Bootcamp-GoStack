@@ -11,9 +11,10 @@ import Appointment from '@modules/appointments/infra/typeorm/entities/Appointmen
 class AppointmentsRepository implements IAppointmentsRepository {
     private appointments: Appointment[] = [];
 
-    public async create({ provider_id, date }: ICreateAppointmentDTO): Promise<Appointment> {
+    public async create({ user_id, provider_id, date }: ICreateAppointmentDTO): Promise<Appointment> {
         const appointment  = new Appointment();
         appointment.id = uuid();
+        appointment.user_id = user_id;
         appointment.provider_id = provider_id;
         appointment.date = date;
 

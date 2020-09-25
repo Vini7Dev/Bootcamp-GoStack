@@ -66,18 +66,18 @@ describe('ResetPasswordService', () => {
     });
 
     it('should not be able to reset the password if passed more than 2 hours', async () => {
-        await fakeUsersRepository.create({
+        const user = await fakeUsersRepository.create({
             name: 'Name',
             email: 'email@example.com',
             password: 'pass123'
         });
 
-        const { token } = await fakeUserTokensRepository.generate('non-existing-token');
+        const { token } = await fakeUserTokensRepository.generate(user.id);
 
         jest.spyOn(Date, 'now').mockImplementationOnce(() => {
             const customDate = new Date();
 
-            return customDate.setHours(customDate.getHours() + 3);
+            return customDate.setHours(customDate.getHours() + 6);
         });
 
         await expect(
