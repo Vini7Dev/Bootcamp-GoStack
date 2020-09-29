@@ -1,6 +1,6 @@
 const auth = {
     jwt: {
-        secret: 'b825ccced50caf297d7ea86934f989ba',
+        secret: process.env.APP_SECRET,
         expiresIn: '1d'
     }
 }
