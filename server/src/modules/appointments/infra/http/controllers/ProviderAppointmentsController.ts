@@ -1,3 +1,4 @@
+import { classToClass } from 'class-transformer';
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
@@ -7,18 +8,18 @@ class ProviderAppointmentsController {
     public async index(req: Request, res: Response): Promise<Response> {
         try {
             const provider_id = req.user.id;
-            const { day, month, year } = req.body;
+            const { day, month, year } = req.query;
 
             const listProvidersAppointments = container.resolve(ListProvidersAppointmentsService);
 
             const appointments = await listProvidersAppointments.execute({
                 provider_id,
-                day,
-                month,
-                year
+                day: Number(day),
+                month: Number(month),
+                year: Number(year)
             });
 
-            return res.json(appointments);
+            return res.json(classToClass(appointments));
         } catch(err) {
             return res.status(err.statusCode).json(err.message);
         }

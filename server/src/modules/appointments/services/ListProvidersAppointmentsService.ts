@@ -4,6 +4,7 @@ import { injectable, inject } from 'tsyringe';
 import Appointment from '../infra/typeorm/entities/Appointment';
 import IAppointmentsRepository from '../repositories/IAppointmentsRepository';
 import ICacheProvider from '@shared/container/providers/Cacheprovider/model/ICacheProvider';
+import { classToClass } from 'class-transformer';
 
 interface IServiceProps {
     provider_id: string;
@@ -35,9 +36,7 @@ class ListProvidersAppointmentsService {
                 year
             });
 
-            await this.cacheProvider.save(cacheKey, appointments);
-
-            console.log('Buscou no Banco!!!');
+            await this.cacheProvider.save(cacheKey, classToClass(appointments));
         }
 
         return appointments;
