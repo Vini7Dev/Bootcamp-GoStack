@@ -5,6 +5,8 @@ import MyRoute from '../routes/MyRoute';
 
 import Login from '../pages/Login';
 import Signup from '../pages/Signup';
+import ForgotPassword from '../pages/ForgotPassword';
+import ResetPassword from '../pages/ResetPassword';
 
 import Dashboard from '../pages/Dashboard';
 
@@ -12,6 +14,8 @@ const Routes: React.FC = () => (
     <Switch>
         <MyRoute path="/" exact component={Login} />
         <MyRoute path="/signup" component={Signup} />
+        <MyRoute path="/forgot-password" component={ForgotPassword} />
+        <MyRoute path="/reset-password" component={ResetPassword} />
 
         <MyRoute path="/dashboard" component={Dashboard} isPrivate />
     </Switch>
