@@ -2,13 +2,19 @@ import React, { createContext, useCallback, useState, useContext } from 'react';
 
 import api from '../services/api';
 
+interface User {
+    id: string;
+    name: string;
+    avatar_url: string;
+}
+
 interface AuthData {
     token: string;
-    user: object;
+    user: User;
 }
 
 interface AuthInterface {
-    user: object;
+    user: User;
     login(credentials: LoginCredentials): Promise<void>;
     logout(): void;
 }
@@ -38,7 +44,7 @@ export const AuthProvider: React.FC = ({ children }) => {
             password
         });
 
-        const [user, token] = response.data;
+        const { user, token } = response.data;
         setData({ token, user });
 
         localStorage.setItem('@GoBarber:token', token);

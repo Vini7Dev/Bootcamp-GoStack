@@ -6,7 +6,7 @@
   "scripts": {
     "dev:server": "ts-node-dev -r tsconfig-paths/register --transpile-only --inspect --ignore-watch node_modules src/shared/infra/http/server.ts",
     "build": "tsc",
-    "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
+    "typeorm": "ts-node-dev -r tsconfig-paths/register --inspect --transpileOnly --ignore-watch node_modules src/shared/infra/http/server.ts",
     "test": "jest"
   },
   "dependencies": {
@@ -29,9 +29,9 @@
     "pg": "^8.3.2",
     "rate-limiter-flexible": "^2.1.10",
     "redis": "^3.0.2",
-    "reflect-metadata": "^0.1.13",
-    "tsyringe": "^4.3.0",
-    "typeorm": "^0.2.25",
+    "reflect-metadata": "^0.1.10",
+    "tsyringe": "^4.2.0",
+    "typeorm": "0.2.24",
     "uuidv4": "^6.2.3"
   },
   "devDependencies": {
@@ -47,8 +47,9 @@
     "@types/redis": "^2.8.27",
     "jest": "^26.4.2",
     "ts-jest": "^26.3.0",
+    "ts-node": "3.3.0",
     "ts-node-dev": "^1.0.0-pre.60",
     "tsconfig-paths": "^3.9.0",
-    "typescript": "^4.0.2"
+    "typescript": "^3.8.3"
   }
 }
