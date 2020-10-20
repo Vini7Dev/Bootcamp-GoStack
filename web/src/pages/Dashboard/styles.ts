@@ -151,6 +151,10 @@ export const Section = styled.section`
         margin-bottom: 16px;
         display: block;
     }
+
+    > p {
+        color: #999591;
+    }
 `;
 
 export const Appointment = styled.div`
@@ -167,6 +171,7 @@ export const Appointment = styled.div`
         align-items: center;
         color: #D4EDE8;
         line-height: 24px;
+        width: 140px;
 
         svg {
             color: #FF9000;

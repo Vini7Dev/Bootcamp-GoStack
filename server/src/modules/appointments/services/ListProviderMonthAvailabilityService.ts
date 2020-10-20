@@ -1,5 +1,5 @@
 import { injectable, inject } from 'tsyringe';
-import { getDaysInMonth, getDate, isAfter } from 'date-fns';
+import { getDaysInMonth, getDate, isAfter, isBefore } from 'date-fns';
 
 import IAppointmentsRepository from '../repositories/IAppointmentsRepository';
 
@@ -21,7 +21,7 @@ class ListProviderMonthAvailabilityService {
         private appointmentsRepository: IAppointmentsRepository
     ) {}
 
-    public async execute({ provider_id, month, year }: IServiceProps): Promise<IResponse> {
+    public async execute({ provider_id, month, year }: IServiceProps): Promise<IResponse> {        
         const appointments = await this.appointmentsRepository.findAllInMonthFromProvider({
             provider_id,
             month,
@@ -44,7 +44,7 @@ class ListProviderMonthAvailabilityService {
 
             return {
                 day,
-                available: isAfter(new Date(), compareDate) && appointmentsInDay.length < 10
+                available: isBefore(new Date().getTime(), compareDate.getTime()) && appointmentsInDay.length < 10
             };
         });
 
