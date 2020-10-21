@@ -17,8 +17,10 @@ class SessionsController {
             });
         
             return res.json({ user: classToClass(user), token });
-        } catch(err) {
-            return res.status(err.statusCode).json(err.message)
+        } catch(error) {
+            console.log(error);
+
+            return res.status(error.statusCode).json(error.message);
         }
     }
 }

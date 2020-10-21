@@ -15,8 +15,10 @@ class ForgotPasswordController {
             });
 
             return res.status(204).json();
-        } catch(err) {
-            return res.json(err.message)
+        } catch(error) {
+            console.log(error);
+
+            return res.status(400).json(error.message);
         }
     }
 }

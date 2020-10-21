@@ -18,6 +18,7 @@ interface AuthInterface {
     user: User;
     login(credentials: LoginCredentials): Promise<void>;
     logout(): void;
+    updateUser(user: User): void;
 }
 
 interface LoginCredentials {
@@ -64,8 +65,17 @@ export const AuthProvider: React.FC = ({ children }) => {
         setData({} as AuthData);
     }, []);
 
+    const updateUser = useCallback((user: User) => {
+        localStorage.setItem('@GoBarber:user', JSON.stringify(user));
+
+        setData({
+            token: data.token,
+            user
+        });
+    }, [setData, data.token]);
+
     return (
-        <AuthContext.Provider value={ { user: data.user, login, logout } }>
+        <AuthContext.Provider value={ { user: data.user, login, logout, updateUser } }>
             {children}
         </AuthContext.Provider>
     )

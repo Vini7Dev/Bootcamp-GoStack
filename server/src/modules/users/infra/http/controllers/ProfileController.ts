@@ -17,20 +17,26 @@ class ProfileController {
     }
 
     public async update(req: Request, res: Response): Promise<Response> {
-        const user_id = req.user.id;
-        const { name, email, old_password, password } = req.body;
+        try {
+            const user_id = req.user.id;
+            const { name, email, old_password, password } = req.body;
 
-        const updateProfileService = container.resolve(UpdateProfileService);
+            const updateProfileService = container.resolve(UpdateProfileService);
 
-        const updatedUser = await updateProfileService.execute({
-            user_id,
-            name,
-            email,
-            old_password,
-            password
-        })
+            const updatedUser = await updateProfileService.execute({
+                user_id,
+                name,
+                email,
+                old_password,
+                password
+            })
 
-        return res.json(classToClass(updatedUser));
+            return res.json(classToClass(updatedUser));
+        } catch(error) {
+            console.log(error);
+
+            return res.status(400).json(error);
+        }
     }
 }
 
