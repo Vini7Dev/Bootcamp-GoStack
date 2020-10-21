@@ -4,6 +4,7 @@ import User from '@modules/users/infra/typeorm/entities/User';
 
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 import ICacheProvider from '@shared/container/providers/Cacheprovider/model/ICacheProvider';
+import { classToClass } from 'class-transformer';
 
 interface IServiceProps {
     user_id: string;
@@ -25,7 +26,7 @@ class ListProvidersService {
         if(!users) {
             users = await this.usersRepository.findAllProviders({ exept_user_id: user_id });
 
-            await this.cacheProvider.save(`providers-list:${user_id}`, users);
+            await this.cacheProvider.save(`providers-list:${user_id}`, classToClass(users));
         }
 
         return users;
