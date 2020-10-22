@@ -6,7 +6,7 @@ import UpdateAvatarUserSerice from '@modules/users/services/UpdateAvatarUserServ
 
 class UserAvatarController {
     public async update(req: Request, res: Response): Promise<Response> {
-        try {
+        try {            
             const updateAvatarUser = container.resolve(UpdateAvatarUserSerice);
             
             const { id, name, email, avatar, created_at, updated_at } = await updateAvatarUser.execute({
