@@ -20,6 +20,7 @@ interface AuthInterface {
     loading: boolean;
     login(credentials: LoginCredentials): Promise<void>;
     logout(): void;
+    updateUser(user: User): Promise<void>;
 }
 
 interface LoginCredentials {
@@ -76,9 +77,18 @@ export const AuthProvider: React.FC = ({ children }) => {
 
         setData({} as AuthData);
     }, []);
+    
+    const updateUser = useCallback(async (user: User) => {
+        await AsyncStorage.setItem('@GoBarber:user', JSON.stringify(user));
+
+        setData({
+            token: data.token,
+            user
+        });
+    }, [setData, data.token]);
 
     return (
-        <AuthContext.Provider value={ { user: data.user, loading, login, logout } }>
+        <AuthContext.Provider value={ { user: data.user, loading, login, logout, updateUser } }>
             {children}
         </AuthContext.Provider>
     )
