@@ -6,6 +6,7 @@ import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
 import getValidationErrors from '../../utils/getValidationErrors';
 import Icons from 'react-native-vector-icons/Feather';
+import ImagePicker from 'react-native-image-picker';
 
 import api from '../../services/api';
 
@@ -32,6 +33,38 @@ const Profile: React.FC = () => {
     const oldPasswordInputRef = useRef<TextInput>(null);
     const passwordInputRef = useRef<TextInput>(null);
     const passwordConfirmationInputRef = useRef<TextInput>(null);
+
+    const handleUpdateAvatar = useCallback(() => {
+        ImagePicker.showImagePicker({
+            title: 'Selecione um avatar',
+            cancelButtonTitle: 'Cancelar',
+            takePhotoButtonTitle: 'Usar câmera',
+            chooseFromLibraryButtonTitle: 'Escolher da galeria'
+        }, response => {
+
+            if(response.didCancel) {
+                return ;
+            }
+            
+            if(response.error) {
+                Alert.alert('Erro ao tentar atualizar o avatar.');
+            }
+
+            const formData = new FormData();
+
+            formData.append('avatar', {
+                type: 'image/jpeg',
+                name: `${user.id}.jpg`,
+                uri: response.uri
+            });
+
+            api.patch('users/avatar', formData).then(
+                updateAvatarResponse => updateUser(updateAvatarResponse.data)
+            ).catch(
+                error => console.log(error)
+            );
+        });
+    }, [updateUser, user.id]);
 
     const handleGoBack = useCallback(() => {
         navigation.goBack();
@@ -103,7 +136,7 @@ const Profile: React.FC = () => {
                 'Ocorreu um erro ao tentar atualizar seu perfil, tente novamente.'
             );
         }
-    }, []);
+    }, [updateUser, navigation]);
 
     return (
         <>
@@ -121,7 +154,7 @@ const Profile: React.FC = () => {
                             <Icons name="chevron-left" color="#999591" size={24} />
                         </BackButton>
 
-                        <UserAvatarButton onPress={() => {}}>
+                        <UserAvatarButton onPress={handleUpdateAvatar}>
                             <UserAvatar source={{ uri: user.avatar_url }} />
                         </UserAvatarButton>
 
