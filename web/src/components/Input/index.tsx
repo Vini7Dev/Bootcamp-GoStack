@@ -37,6 +37,7 @@ const Input: React.FC<InputProps> = ({ icon: Icon, containerStyle, name, ...rest
 
     return (
         <Container
+            data-testid = "input-container"
             style={containerStyle}
             isError={!!error}
             isFocus={isFocus}
