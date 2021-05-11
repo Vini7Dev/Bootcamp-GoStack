@@ -1,4 +1,4 @@
-<img src="/web/src/assets/logo.svg" width=100 style="border-radius: 10px;"/>
+<img src="/web/src/assets/logo.svg" width=250 style="border-radius: 10px;"/>
 
 # GoBarber
 ## GoStack-Bootcamp
